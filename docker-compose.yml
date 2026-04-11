@@ -1,6 +1,7 @@
 services:
   hello:
     image: ghcr.io/real-life-org/hello-deploy:latest
+    network_mode: bridge
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.hello.rule=Host(`h2980589.stratoserver.net`)"
