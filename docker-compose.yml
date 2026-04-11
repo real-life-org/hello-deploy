@@ -1,0 +1,8 @@
+services:
+  hello:
+    image: ghcr.io/real-life-org/hello-deploy:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hello.rule=Host(`h2980589.stratoserver.net`)"
+      - "traefik.http.routers.hello.entrypoints=websecure"
+      - "traefik.http.routers.hello.tls.certresolver=letsencrypt"
