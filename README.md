@@ -8,15 +8,27 @@ Vorlage für Auto-Deployment auf unseren Servern.
 2. GitHub Action baut ein Docker Image und pushed es zu ghcr.io
 3. Watchtower auf dem Server erkennt das neue Image und startet den Container neu
 
+Du brauchst SSH nur **einmalig** um den Container das erste Mal zu starten. Danach ist alles automatisch — jeder `git push` deployed die neue Version innerhalb von ca. 30 Sekunden.
+
 ## Eigenes Projekt aufsetzen
 
 ### 1. Repo erstellen
 
 Erstelle ein neues Repo mit einem `Dockerfile` und kopiere die `.github/workflows/deploy.yml` aus diesem Repo.
 
-### 2. Docker Compose auf dem Server anlegen
+### 2. Erster Push
 
-SSH auf den Server und erstelle eine `docker-compose.yml`:
+Push deinen Code auf `main`. Die GitHub Action baut das Image automatisch.
+
+### 3. Container starten (einmalig)
+
+SSH auf den Server:
+
+```bash
+ssh root@h2980589.stratoserver.net
+```
+
+Container anlegen und starten:
 
 ```bash
 mkdir -p /root/apps/MEIN-PROJEKT
@@ -36,12 +48,12 @@ cd /root/apps/MEIN-PROJEKT && docker compose up -d
 
 Ersetze:
 - `DEIN-GITHUB-USER/DEIN-REPO` mit deinem Repo
-- `MEIN-PROJEKT` mit einem kurzen Namen (wird für Traefik-Routing genutzt)
+- `MEIN-PROJEKT` mit einem kurzen Namen
 - `meine-domain.de` mit deiner Domain (DNS muss auf den Server zeigen)
 
-### 3. Fertig
+### 4. Fertig
 
-Ab jetzt: `git push` und nach ca. 30 Sekunden ist die neue Version live.
+Ab jetzt brauchst du kein SSH mehr. Jeder `git push` auf `main` deployed automatisch.
 
 ## Eigene Domain nutzen
 
