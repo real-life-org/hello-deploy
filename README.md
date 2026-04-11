@@ -25,14 +25,14 @@ Push deinen Code auf `main`. Die GitHub Action baut das Image automatisch.
 SSH auf den Server:
 
 ```bash
-ssh root@h2980589.stratoserver.net
+ssh timo@h2980589.stratoserver.net
 ```
 
 Container anlegen und starten:
 
 ```bash
-mkdir -p /root/apps/MEIN-PROJEKT
-cat > /root/apps/MEIN-PROJEKT/docker-compose.yml << 'EOF'
+mkdir -p ~/apps/MEIN-PROJEKT
+cat > ~/apps/MEIN-PROJEKT/docker-compose.yml << 'EOF'
 services:
   app:
     image: ghcr.io/DEIN-GITHUB-USER/DEIN-REPO:latest
@@ -43,7 +43,7 @@ services:
       - "traefik.http.routers.MEIN-PROJEKT.entrypoints=websecure"
       - "traefik.http.routers.MEIN-PROJEKT.tls.certresolver=letsencrypt"
 EOF
-cd /root/apps/MEIN-PROJEKT && docker compose up -d
+cd ~/apps/MEIN-PROJEKT && docker compose up -d
 ```
 
 Ersetze:
